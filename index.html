@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <style>
+        .container {
+            margin:auto;
+            width: 30%;
+        }
+
+    </style>
+    <div class="container">
+        <form class="toDoForm" action="">
+            <h1>To Do list</h1>
+            <input class="inputToDo" type="text" value="" placeholder="add an item...">
+            <input class="submitBtn" type="submit" value="Send">
+        </form>
+        <div class="formOutput">
+
+
+        </div>
+    </div>  
+
+
+    <script>
+        //declare form elements on page
+        const inputBox = document.querySelector(".inputToDo"); 
+        const toDoForm = document.querySelector(".toDoForm");
+
+        function handleSubmit(e) {
+            e.preventDefault(); //stop page from refreshing
+            const txtInput = inputBox.value; // save input txt
+            toDoForm.reset(); //clear input box
+            txtInput === "" ? console.log("no input") : console.log(txtInput);   
+            return txtInput
+        }        
+        toDoForm.addEventListener("submit", handleSubmit);
+        
+        //create a new UL list if there isnt one when a new item is submited
+        const itemsList = document.querySelector('.formOutput');
+        function createUl(){
+            // itemsList.hasChildNodes() ? null : (let newUl = document.createElement('ul'));
+            if(itemsList.hasChildNodes() !== false) {
+                return null
+            } else {const newUl = document.createElement('ul');
+                itemsList.appendChild(newUl);
+                }
+        }
+       
+       
+        
+        //take the input that was written in the box and convert it into html
+      
+        
+        //print the html under the To Do list box in a list
+        //refactor with XSS proof
+
+
+
+
+    </script>
+</body>
+</html>
+
+
