@@ -19,9 +19,8 @@
             <input class="inputToDo" type="text" value="" placeholder="add an item...">
             <input class="submitBtn" type="submit" value="Send">
         </form>
+
         <div class="formOutput">
-
-
         </div>
     </div>  
 
@@ -31,36 +30,43 @@
         const inputBox = document.querySelector(".inputToDo"); 
         const toDoForm = document.querySelector(".toDoForm");
 
+        //create a new UL list if there isnt one when a new item is submited
+        const itemsList = document.querySelector('.formOutput');
+        function createUl(){
+            // itemsList.hasChildNodes() ? null : (let newUl = document.createElement('ul'));
+            if(itemsList.hasChildNodes() === false) {
+                return null
+            } else {const newUl = document.createElement('ul');
+                itemsList.appendChild(newUl);
+                }
+        }
+        createUl() //test create ui function
+
         function handleSubmit(e) {
             e.preventDefault(); //stop page from refreshing
             const txtInput = inputBox.value; // save input txt
             toDoForm.reset(); //clear input box
             txtInput === "" ? console.log("no input") : console.log(txtInput);   
             return txtInput
+            createNewLi(txtInput)
         }        
         toDoForm.addEventListener("submit", handleSubmit);
         
-        //create a new UL list if there isnt one when a new item is submited
-        const itemsList = document.querySelector('.formOutput');
-        function createUl(){
-            // itemsList.hasChildNodes() ? null : (let newUl = document.createElement('ul'));
-            if(itemsList.hasChildNodes() !== false) {
-                return null
-            } else {const newUl = document.createElement('ul');
-                itemsList.appendChild(newUl);
-                }
-        }
-       
-       
         
+       function createNewLi(txtInput){
+            const newLi = `
+            <li>${txtInput}</li>
+            `
+            const newFragment = document.createRange().createContextualFragment(newLi)
+            return newUl.appendChild('.newFragment');   
+       }
+       
+        //currently the input is saved in varriable txtInput but not used
         //take the input that was written in the box and convert it into html
-      
+        //connect function into single progress triggered upon clicking the submit button
         
         //print the html under the To Do list box in a list
         //refactor with XSS proof
-
-
-
 
     </script>
 </body>
