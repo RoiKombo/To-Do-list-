@@ -29,38 +29,38 @@
         //declare form elements on page
         const inputBox = document.querySelector(".inputToDo"); 
         const toDoForm = document.querySelector(".toDoForm");
+        const itemsList = document.querySelector('.formOutput');
 
         //create a new UL list if there isnt one when a new item is submited
-        const itemsList = document.querySelector('.formOutput');
-        function createUl(){
-            // itemsList.hasChildNodes() ? null : (let newUl = document.createElement('ul'));
+        function createNewItems(newItem){
             if(itemsList.hasChildNodes() === false) {
                 return null
             } else {const newUl = document.createElement('ul');
                 itemsList.appendChild(newUl);
                 }
+
+             const newTodoItem = `
+             <li>${newItem}</li>
+             `
+             const toDoList = document.querySelector('ul');
+             const newFragment = document.createRange().createContextualFragment(newTodoItem)
+             toDoList.appendChild(newFragment);   
         }
-        createUl() //test create ui function
+
+        const itemList = document.querySelector('ul');
+        
 
         function handleSubmit(e) {
             e.preventDefault(); //stop page from refreshing
             const txtInput = inputBox.value; // save input txt
             toDoForm.reset(); //clear input box
-            txtInput === "" ? console.log("no input") : console.log(txtInput);   
-            return txtInput
-            createNewLi(txtInput)
+            txtInput === "" ? console.log('no input') : createNewItems(txtInput);   
+            console.log(txtInput)
         }        
         toDoForm.addEventListener("submit", handleSubmit);
         
         
-       function createNewLi(txtInput){
-            const newLi = `
-            <li>${txtInput}</li>
-            `
-            const newFragment = document.createRange().createContextualFragment(newLi)
-            return newUl.appendChild('.newFragment');   
-       }
-       
+        
         //currently the input is saved in varriable txtInput but not used
         //take the input that was written in the box and convert it into html
         //connect function into single progress triggered upon clicking the submit button
