@@ -9,8 +9,14 @@
     <style>
         .container {
             margin:auto;
-            width: 30%;
         }
+        .todoitem {
+            color: blue;
+        }
+        .todoitemdone {
+            color: green;
+        }
+
 
     </style>
     <div class="container">
@@ -31,25 +37,28 @@
         const toDoForm = document.querySelector(".toDoForm");
         const itemsList = document.querySelector('.formOutput');
 
-        //create a new UL list if there isnt one when a new item is submited
+        //create a new UL list if there isnt one when a new item is submited and single Li item
         function createNewItems(newItem){
+            
             if(itemsList.hasChildNodes() === false) {
-                return null
+                null
             } else {const newUl = document.createElement('ul');
                 itemsList.appendChild(newUl);
                 }
-
              const newTodoItem = `
-             <li>${newItem}</li>
+             <li class='todoitem'>${newItem}
+             <button class='deleteTask'>X</button>
+             <button class='doneBtn'>Done</button>
+             </li>
              `
              const toDoList = document.querySelector('ul');
              const newFragment = document.createRange().createContextualFragment(newTodoItem)
              toDoList.appendChild(newFragment);   
         }
 
-        const itemList = document.querySelector('ul');
+        // const itemList = document.querySelector('ul');
         
-
+        //-----Original handle function to start the flow upon submit-----
         function handleSubmit(e) {
             e.preventDefault(); //stop page from refreshing
             const txtInput = inputBox.value; // save input txt
@@ -58,14 +67,24 @@
             console.log(txtInput)
         }        
         toDoForm.addEventListener("submit", handleSubmit);
-        
-        
-        
-        //currently the input is saved in varriable txtInput but not used
-        //take the input that was written in the box and convert it into html
-        //connect function into single progress triggered upon clicking the submit button
-        
-        //print the html under the To Do list box in a list
+
+        //done button functionality
+        function finishItem(e){  
+                if (e.target.classList == 'doneBtn') {
+                const doneButton = e.target;
+                const currentItem = doneButton.parentNode;
+                currentItem.classList.replace(`${currentItem.classList}`,'todoitemdone')
+                console.log(currentItem)
+            } else if (e.target.classList == 'deleteTask'){
+                const xButton = e.target;
+                xButton.parentNode.remove(null)
+            } 
+        }
+
+        itemsList.addEventListener("click",finishItem)
+
+        //fix countinuous creation of ul
+        //add clear list button
         //refactor with XSS proof
 
     </script>
