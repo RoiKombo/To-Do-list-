@@ -32,6 +32,29 @@
 
 
     <script>
+
+
+      // this is new
+
+      // function createUl() {
+      //   const newUl = document.createElement("ul");
+      //   return newUl;
+      // }
+
+      function addItem(text) {
+        const newTodoItem = `
+        <li class='todoitem'>${text}
+            <button class='deleteTask'>X</button>
+            <button class='doneBtn'>Done</button>
+        </li>`;
+        const item = document.createElement("li");
+        item.innerHTML = newTodoItem;
+        console.log(item);
+        return item;
+      }
+
+      //end new
+
         //declare form elements on page
         const inputBox = document.querySelector(".inputToDo"); 
         const toDoForm = document.querySelector(".toDoForm");
@@ -39,24 +62,18 @@
 
         //create a new UL list if there isnt one when a new item is submited and single Li item
         function createNewItems(newItem){
-            
-            if(itemsList.hasChildNodes() === false) {
-                null
-            } else {const newUl = document.createElement('ul');
-                itemsList.appendChild(newUl);
-                }
-             const newTodoItem = `
-             <li class='todoitem'>${newItem}
-             <button class='deleteTask'>X</button>
-             <button class='doneBtn'>Done</button>
-             </li>
-             `
-             const toDoList = document.querySelector('ul');
-             const newFragment = document.createRange().createContextualFragment(newTodoItem)
-             toDoList.appendChild(newFragment);   
-        }
+            let ul = document.querySelector('.formOutput ul');
+            const listItem = addItem(newItem);
 
-        // const itemList = document.querySelector('ul');
+            if(ul) {
+                ul.appendChild(listItem);
+            } else {
+                ul = document.createElement('ul');
+                ul.appendChild(listItem);
+            }
+            console.log(ul);
+            itemsList.appendChild(ul);   
+        }
         
         //-----Original handle function to start the flow upon submit-----
         function handleSubmit(e) {
@@ -71,6 +88,12 @@
         //done button functionality
         function finishItem(e){  
                 if (e.target.classList == 'doneBtn') {
+
+                // do the same as i did with: 
+                // 1. get the ul element
+                // 2. find the correct li
+                // 3. remove the li form the ul or mark it as done with css
+
                 const doneButton = e.target;
                 const currentItem = doneButton.parentNode;
                 currentItem.classList.replace(`${currentItem.classList}`,'todoitemdone')
