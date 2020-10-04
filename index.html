@@ -32,7 +32,7 @@
 
 
     <script>
-        function createItem(text){
+        const createItem = text => {
             const newTodoItem = `
             <li class='todoitem'>${text}
             <button class='deleteTask'>X</button>
@@ -50,7 +50,7 @@
         const itemsList = document.querySelector('.formOutput');    
 
         
-        function createNewItems(newItem){
+        const createNewItems = newItem => {
 
             let ul = document.querySelector('.formOutput ul');
             const listItem = createItem(newItem);
@@ -66,7 +66,7 @@
           
         
         //-----Original handle function to start the flow upon submit-----
-        function handleSubmit(e) {
+        const handleSubmit = e =>  {
             e.preventDefault(); //stop page from refreshing
             const txtInput = inputBox.value; // save input txt
             toDoForm.reset(); //clear input box
@@ -78,7 +78,7 @@
 
 
         //done button functionality
-        function finishItem(e){  
+        const finishItem = e => {  
                 if (e.target.classList == 'doneBtn') {
                 const doneButton = e.target;
                 const currentItem = doneButton.parentNode;
@@ -99,9 +99,7 @@
 
         // ---add minimal css for project to seem somewhat presentable
 
-        // ---
         
-        //fix countinuous creation of ul
 
 
         //add clear list button
